@@ -1,30 +1,32 @@
 /**
- * 1. Declare two functions: calculateGolfAverages and calculateTotalAverages
+ * 1. Declare two functions: calculateRoundAverages and calculateTotalAverages
  */
 function calculateRoundAverages(scores) {
+  const averages = [];
   for (let i = 0; i < scores.length; i++) {
     let roundSum = 0;
+    let average;
     for (let j = 0; j < scores[i].length; j++) {
       roundSum = roundSum + scores[i][j];
+      average = roundSum / golfScores[i].length;
     }
-    console.log(`The average score for round ${i + 1} is ${(roundSum / golfScores[i].length).toFixed(2)}`);
+    averages.push(average);
   }
+  return averages;
 };
 
 function calculateTotalAverages(scores) {
+  const averages = calculateRoundAverages(golfScores);
   let sum = 0;
-  let all = 0;
-  for (let i = 0; i < scores.length; i++) {
-    for (let j = 0; j < scores[i].length; j++) {
-      sum = sum + scores[i][j];
-    }
-    all = all + scores[i].length;
+  for (let i = 0; i < averages.length; i++) {
+    sum = sum + averages[i];
+    console.log(`The average score for round ${i + 1} is ${averages[i].toFixed(2)}`);
   }
-  console.log(`The average of averages is ${(sum / all).toFixed(2)}`);
+  console.log(`The average of averages is ${(sum / averages.length).toFixed(2)}`);
 };
 
 /**
- * 2. Implement calculateGolfAverages
+ * 2. Implement calculateRoundAverages
  * 
  * This function should print out the average score of each round
  * This function should receive the "golfScores" array as a parameter
